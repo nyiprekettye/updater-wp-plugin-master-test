@@ -1,8 +1,8 @@
 <?php
 /*
-	Plugin Name: updater-wp-plugin-master-test
+	Plugin Name: updater-wp-plugin-master-test updated version
 	Description: This is for updating your Wordpress plugin.
-	Version: 1.0.2
+	Version: 1.0.3
 	Author: Nyíri Péter
 	Author URI: 
 */
