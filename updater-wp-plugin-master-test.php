@@ -19,8 +19,7 @@
 // $updater->initialize();
 
 
-
-require_once( 'BFIGitHubPluginUploader.php' );
+include_once( plugin_dir_path( __FILE__ ) . 'BFIGitHubPluginUploader.php' );
 if ( is_admin() ) {
     new BFIGitHubPluginUpdater( __FILE__, 'nyiprekettye', "updater-wp-plugin-master-test" );
 }
