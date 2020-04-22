@@ -1,4 +1,3 @@
-
 <?php
 
 class BFIGitHubPluginUpdater
@@ -106,31 +105,29 @@ class BFIGitHubPluginUpdater
             return false;
         }
 
-        // Add our plugin information
-        $response->last_updated = $this->githubAPIResult->published_at;
-        $response->slug = $this->slug;
-        $response->plugin_name  = $this->pluginData["Name"];
-        $response->version = $this->githubAPIResult->tag_name;
-        $response->author = $this->pluginData["AuthorName"];
-        $response->homepage = $this->pluginData["PluginURI"];
 
-        // This is our release download zip file
-        $downloadLink = $this->githubAPIResult->zipball_url;
 
-        // Include the access token for private GitHub repos
-        if (!empty($this->accessToken)) {
-            $downloadLink = add_query_arg(
-                array("access_token" => $this->accessToken),
-                $downloadLink
-            );
-        }
-        $response->download_link = $downloadLink;
-        $response->sections = array(
-            'description' => $this->pluginData["Description"],
-            'changelog' =>  $this->githubAPIResult->body
-        );
 
-        $response->requires = '3.3';
+        // // Add our plugin information
+        // $response->last_updated = $this->githubAPIResult->published_at;
+        // $response->slug = $this->slug;
+        // $response->plugin_name  = $this->pluginData["Name"];
+        // $response->version = $this->githubAPIResult->tag_name;
+        // $response->author = $this->pluginData["AuthorName"];
+        // $response->homepage = $this->pluginData["PluginURI"];
+
+        // // This is our release download zip file
+        // $downloadLink = $this->githubAPIResult->zipball_url;
+
+        // // Include the access token for private GitHub repos
+        // if ( !empty( $this->accessToken ) ) {
+        //     $downloadLink = add_query_arg(
+        //         array( "access_token" => $this->accessToken ),
+        //         $downloadLink
+        //     );
+        // }
+        // $response->download_link = $downloadLink;
+
         // // We're going to parse the GitHub markdown release notes, include the parser
         // require_once( plugin_dir_path( __FILE__ ) . "Parsedown.php" );
 
@@ -153,16 +150,62 @@ class BFIGitHubPluginUpdater
         //     }
         // }
 
-        // Gets the tested version of WP if available
-        $matches = null;
-        preg_match("/tested:\s([\d\.]+)/i", $this->githubAPIResult->body, $matches);
-        if (!empty($matches)) {
-            if (is_array($matches)) {
-                if (count($matches) > 1) {
-                    $response->tested = $matches[1];
-                }
-            }
-        }
+        // // Gets the tested version of WP if available
+        // $matches = null;
+        // preg_match( "/tested:\s([\d\.]+)/i", $this->githubAPIResult->body, $matches );
+        // if ( !empty( $matches ) ) {
+        //     if ( is_array( $matches ) ) {
+        //         if ( count( $matches ) > 1 ) {
+        //             $response->tested = $matches[1];
+        //         }
+        //     }
+        // }
+
+         //plugin_name -nam
+        //  chanelog
+
+        $response->last_updated = $this->githubAPIResult->published_at;
+        $response->slug = $this->slug;
+        $response->plugin_name  = $this->pluginData["Name"];
+        $response->version = $this->githubAPIResult->tag_name;
+        $response->author = $this->pluginData["AuthorName"];
+        $response->homepage = $this->pluginData["PluginURI"];
+        $response->download_link = $this->githubAPIResult->zipball_url;
+        $response->sections = array(
+            // 'description' => $this->pluginData["Description"],
+            'description' => 'HOSSZU LEIRAS',
+            // 'changelog' => $this->githubAPIResult->body
+            'changelog' => 'CAHNELOG',
+            'Updates'        => 'uPDATE',
+        );
+
+        $response->author_profile = $this->pluginData["AuthorURI"];
+        // $response->short_description = $this->pluginData["Description"];
+        // $response->short_description = 'ROVID LEIRAS';
+        $response->requires = '3.3';
+        $response->tested = '3.3';
+
+        // $response = array(
+        //     'slug'                => $this->basename,
+        //     'requires'                    => '3.3',
+        //     'tested'                        => '4.4.1',
+        //     'version'            => $this->githubAPIResult->tag_name,
+        //     'author'            => $this->pluginData["AuthorName"],
+        //     'last_updated'        => $this->githubAPIResult->published_at,
+        //     'homepage'            => $this->pluginData["PluginURI"],
+        //     'download_link'        => $this->githubAPIResult->zipball_url
+        //     // 'name'                => $this->pluginData["Name"],
+        //     // 'rating'                        => '100.0',
+        //     // 'num_ratings'                => '10823',
+        //     // 'downloaded'                => '14249',
+        //     // 'added'                            => '2016-01-05',
+        //     // 'author_profile'    => $this->pluginData["AuthorURI"],
+        //     // 'short_description' => $this->pluginData["Description"],
+        //     // 'sections'            => array(
+        //         // 'Description'    => $this->pluginData["Description"],
+        //     //     'Updates'        => $this->githubAPIResult->body,
+        //     // ),
+        // );
 
         return $response;
     }
